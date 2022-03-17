@@ -12,6 +12,7 @@ function Footer()
                 </div>
                 <div className="footer-middle">
                 <div className="row">
+
                     <div className="col-md-3 col-sm-6">
                         <h4>shop</h4>
                         <ul className="list-unstyled"> 
@@ -20,6 +21,7 @@ function Footer()
                             <li> <a>Sunny blog</a></li>
                         </ul>
                     </div>
+
                     <div className="col-md-3 col-sm-6">
                         <h4>Sell</h4>
                         <ul className="list-unstyled">
@@ -29,6 +31,7 @@ function Footer()
                             <li> <a>Affiliates</a></li>
                         </ul>
                     </div>
+
                     <div className="col-md-3 col-sm-6">
                         <h4>About</h4>
                         <ul className="list-unstyled">
@@ -40,6 +43,7 @@ function Footer()
                             <li> <a>Impact</a></li>
                         </ul>
                     </div>
+
                     <div className="col-md-3 col-sm-6">
                         <h4>Help</h4>
                         <ul className="list-unstyled">
@@ -48,6 +52,7 @@ function Footer()
                             <li> <a>Privacy Settings</a></li>
                         </ul>
                     </div>
+                    
                 </div>
             </div>
             </div>
