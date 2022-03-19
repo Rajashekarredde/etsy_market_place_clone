@@ -1,135 +1,74 @@
 import React from "react";
-import "./NavBar.css";
+import cookie from "react-cookies";
 import styled from "styled-components";
 
-function Footer() {
+function Dashboard() {
   return (
-    <FooterContainer className="main-footer">
-      <section class="etsy">
-        <div class="content-area">
-          <div class="etsy-title">
-            <h2>What is Etsy</h2>
-            <a href="#">Read our wonderfully weird story</a>
+    <div>
+      <div className="dash_board">
+        <h3 style={{ fontFamily : 'Guardian-EgypTT', fontSize: "50px", fontWeight: "normal"}} 
+            className="title">Welcome back,  
+            <span style={{  textDecoration : "underline"}}>Rajashekar Reddy!</span></h3>
+        <div className="dashboard_items">
+          <div className="dashboard_item">
+            <img
+             src="https://cdn.pixabay.com/photo/2020/04/07/05/37/mask-5012093_1280.jpg"
+              alt="face mask"
+            ></img>
+            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:60  }}>face mask</h3>
           </div>
-          <div class="etsy-area">
-            <div class="etsy-card">
-              <h3>A one-of-a-kind community</h3>
-              <p>
-                Etsy is a global online marketplace, where people come together
-                to make, sell, buy and collect unique items.
-              </p>
-            </div>
-            <div class="etsy-card">
-              <h3>Support independent creators</h3>
-              <p>
-                There’s no Etsy warehouse – just millions of people selling the
-                things they love. We make the whole process easy, helping you
-                connect directly with makers to find something extraordinary.
-              </p>
-            </div>
-            <div class="etsy-card">
-              <h3>Peace of mind</h3>
-              <p>
-                Your privacy is the highest priority of our dedicated team. And
-                if you ever need assistance, we are always ready to step in for
-                support.
-              </p>
-            </div>
+          <div className="dashboard_item">
+            <img
+             src="https://cdn.pixabay.com/photo/2017/09/15/12/10/mockup-2752023_1280.jpg"
+              alt="face mask"
+            ></img>
+            <h3 style={{ fontSize: "20px" , fontWeight: "normal", marginLeft:65 }}>
+              wall decor
+            </h3>
           </div>
-          <div class="etsy-footer">
-            <h4>Have a question? Well, we’ve got some answers.</h4>
-            <button class="btn">
-              <a href="#">Go to Help Center</a>
-            </button>
+          <div className="dashboard_item">
+            <img
+             src="https://cdn.pixabay.com/photo/2015/12/03/00/04/snowman-1073524_1280.jpg"
+              alt="face mask"
+            ></img>
+            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:65 }}>
+              gift ideas
+            </h3>
           </div>
-        </div>
-      </section>
-
-      <section class="news">
-        <div class="content-area">
-          <h4>
-            Yes! Send me exclusive offers, unique gift ideas, and personalized
-            tips for shopping and selling on Etsy
-          </h4>
-          <div class="subscribe">
-            <input name="subscribe_input" type="text" placeholder="Enter your email" />
+          <div className="dashboard_item">
+            <img
+              src="https://cdn.pixabay.com/photo/2015/05/25/14/27/summer-783344_1280.jpg"
+              alt="home"
+            ></img>
+            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:75 }}>garden</h3>
           </div>
-        </div>
-      </section>
-
-      <section class="footer-section-one">
-        <div class="content-area">
-          <div class="footer">
-            <div class="links">
-              <h3>Shop</h3>
-              <ul>
-                <li>
-                  <a href="#">Gift cards</a>
-                </li>
-                <li>
-                  <a href="#">Etsy blog</a>
-                </li>
-              </ul>
-            </div>
-            <div class="links">
-              <h3>Sell</h3>
-              <ul>
-                <li>
-                  <a href="#">Sell on Etsy</a>
-                </li>
-                <li>
-                  <a href="#">Teams</a>
-                </li>
-                <li>
-                  <a href="#">Forums</a>
-                </li>
-                <li>
-                  <a href="#">Affiliates</a>
-                </li>
-              </ul>
-            </div>
-            <div class="links">
-              <h3>About</h3>
-              <ul>
-                <li>
-                  <a href="#">Etsy, Inc.</a>
-                </li>
-                <li>
-                  <a href="#">Policies</a>
-                </li>
-                <li>
-                  <a href="#">Investors</a>
-                </li>
-                <li>
-                  <a href="#">Careers</a>
-                </li>
-                <li>
-                  <a href="#">Press</a>
-                </li>
-                <li>
-                  <a href="#">Impact</a>
-                </li>
-              </ul>
-            </div>
-            <div class="links">
-              <h3>Help</h3>
-              <ul>
-                <li>
-                  <a href="#">Help Centre</a>
-                </li>
-                <li>
-                  <a href="#">Privacy settings</a>
-                </li>
-              </ul>
-            </div>
+          <div className="dashboard_item">
+            <img
+             src="https://cdn.pixabay.com/photo/2020/07/27/08/07/spa-5441663_1280.jpg"
+              alt="home"
+            ></img>
+            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:75 }}>
+              self care 
+            </h3>
+          </div>
+          <div className="dashboard_item">
+            <img
+             src="https://cdn.pixabay.com/photo/2016/09/02/11/43/thread-1638953_1280.jpg"
+              alt="home"
+            ></img>
+            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:75 }}>
+              craft kits
+            </h3>
           </div>
         </div>
-      </section>
-    </FooterContainer>
+      </div>
+    </div>
   );
 }
 
-export default Footer;
+export default Dashboard;
+
+
 
 const FooterContainer = styled.footer`
   * {
