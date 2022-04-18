@@ -1,7 +1,9 @@
 .modalBackground {
+  position: absolute;
+  top: 0;
   width: 100vw;
-  height: 100vh;
-  background-color: #D3D3D3	;
+  height: 216vh;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   position: absolute;
   justify-content: center;
@@ -67,4 +69,8 @@
 
 #cancelBtn {
   background-color: black;
+}
+
+.currency_body {
+  background-color: white;
 }

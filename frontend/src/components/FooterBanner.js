@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
-import Modal from './CurrencyModal';
+import styled from "styled-components";
+import CurrencyModal from "./CurrencyModal";
 
-function FooterBanner()
-{
-    const [modalOpen, setModalOpen] = useState(false);
-    return (
-        <FooterBannerContainer className="main-footer">
-
-            <div className="container">
-                <div className="footer-middle">
-                   <div className="row">
-                       <div className="col-sm-6">
-                           <button className="button"
-                             onClick={() => {
-                                setModalOpen(true);
-                              }}
-                           > 
-                           Currency 
-                           </button>
-                       </div>
-                       <div className="col-sm-2">@2022 Etsy'Inc</div>
-                       <div className="col-sm-2">Terms of Use</div>
-                       <div className="col-sm-2">Privacy Settings</div>
-                   </div>
-                </div>
+function FooterBanner() {
+  const [modalOpen, setModalOpen] = useState(false);
+  return (
+    <FooterBannerContainer className="main-footer">
+      <div className="container">
+        <div className="footer-middle">
+          <div className="row">
+            <div className="col-sm-6">
+              <button
+                className="button"
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                Currency
+              </button>
             </div>
-            {modalOpen && <Modal setOpenModal={setModalOpen} />}
-        </FooterBannerContainer>
-    );
+            <div className="col-sm-2">@2022 Etsy'Inc</div>
+            <div className="col-sm-2">Terms of Use</div>
+            <div className="col-sm-2">Privacy Settings</div>
+          </div>
+        </div>
+      </div>
+      {modalOpen && <CurrencyModal setOpenModal={setModalOpen} />}
+    </FooterBannerContainer>
+  );
 }
 
 export default FooterBanner;
@@ -59,5 +58,4 @@ const FooterBannerContainer = styled.footer`
     opacity: 0.3;
 }
 
-`
-;
+`;

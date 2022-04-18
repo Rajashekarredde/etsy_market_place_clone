@@ -5,72 +5,52 @@ import styled from "styled-components";
 function Dashboard() {
   return (
     <div>
-      <div className="dash_board">
-        <h3 style={{ fontFamily : 'Guardian-EgypTT', fontSize: "50px", fontWeight: "normal"}} 
-            className="title">Welcome back,  
-            <span style={{  textDecoration : "underline"}}>Rajashekar Reddy!</span></h3>
-        <div className="dashboard_items">
-          <div className="dashboard_item">
-            <img
-             src="https://cdn.pixabay.com/photo/2020/04/07/05/37/mask-5012093_1280.jpg"
-              alt="face mask"
-            ></img>
-            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:60  }}>face mask</h3>
-          </div>
-          <div className="dashboard_item">
-            <img
-             src="https://cdn.pixabay.com/photo/2017/09/15/12/10/mockup-2752023_1280.jpg"
-              alt="face mask"
-            ></img>
-            <h3 style={{ fontSize: "20px" , fontWeight: "normal", marginLeft:65 }}>
-              wall decor
-            </h3>
-          </div>
-          <div className="dashboard_item">
-            <img
-             src="https://cdn.pixabay.com/photo/2015/12/03/00/04/snowman-1073524_1280.jpg"
-              alt="face mask"
-            ></img>
-            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:65 }}>
-              gift ideas
-            </h3>
-          </div>
-          <div className="dashboard_item">
-            <img
-              src="https://cdn.pixabay.com/photo/2015/05/25/14/27/summer-783344_1280.jpg"
-              alt="home"
-            ></img>
-            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:75 }}>garden</h3>
-          </div>
-          <div className="dashboard_item">
-            <img
-             src="https://cdn.pixabay.com/photo/2020/07/27/08/07/spa-5441663_1280.jpg"
-              alt="home"
-            ></img>
-            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:75 }}>
-              self care 
-            </h3>
-          </div>
-          <div className="dashboard_item">
-            <img
-             src="https://cdn.pixabay.com/photo/2016/09/02/11/43/thread-1638953_1280.jpg"
-              alt="home"
-            ></img>
-            <h3 style={{ fontSize: "20px", fontWeight: "normal", marginLeft:75 }}>
-              craft kits
-            </h3>
-          </div>
+     
+      <DashboardContainer>    
+    <section class="content-area">
+        <h4 class="title-text">Shop our selections <span class="shop-link">Items hand-picked by our editors</span></h4>
+        <div class="shop">
+            <div class="shop-card">
+                <img src="https://cdn.pixabay.com/photo/2017/11/08/18/41/girl-2931287_1280.jpg" alt=""/>
+                <h5>Anniverary gifts</h5>
+
+            </div>
+            <div class="shop-card">
+                <img src="https://cdn.pixabay.com/photo/2019/11/30/13/21/gift-4663231_1280.jpg" alt=""/>
+                <h5>Gifts for him</h5>
+
+            </div>
+            <div class="shop-card">
+                <img src="https://cdn.pixabay.com/photo/2014/12/01/19/23/gift-553149_1280.jpg" alt=""/>
+                <h5>Gifts for her</h5>
+
+
+            </div>
+            <div class="shop-card">
+                <img src="https://cdn.pixabay.com/photo/2014/11/27/22/44/gift-548290_1280.jpg" alt=""/>
+                <h5>Personalised gift ideas</h5>
+
+            </div>
+            <div class="shop-card">
+                <img src="https://cdn.pixabay.com/photo/2017/11/14/14/12/wedding-flowers-2948530_1280.jpg" alt=""/>
+                <h5>Wedding gifts</h5>
+
+            </div>
+            <div class="shop-card">
+                <img src="https://cdn.pixabay.com/photo/2018/03/26/03/19/gift-3261509_1280.jpg" alt="" />
+                <h5>Housewarming gifts</h5>
+
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    </section>
+    </DashboardContainer>
+
+    </div>  );
 }
 
 export default Dashboard;
 
-
-
-const FooterContainer = styled.footer`
+const DashboardContainer = styled.footer`
   * {
     margin: 0;
   }
@@ -208,8 +188,8 @@ const FooterContainer = styled.footer`
     padding: 10px;
   }
   .content-area {
+    margin-left: 90px;
     width: 88%;
-    margin: auto;
   }
   .hero-title {
     margin-top: 10px;
@@ -302,7 +282,6 @@ const FooterContainer = styled.footer`
     border-radius: 8px;
   }
   .title-text {
-    margin-top: 20px;
     margin-bottom: 10px;
   }
 

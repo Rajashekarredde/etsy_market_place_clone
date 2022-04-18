@@ -5,19 +5,16 @@ import Dashboard from "./Dashboard";
 import Footer from "./Footer";
 import EtsyBody from "./EtsyBody";
 import AboutFooter from "./AboutFooter";
+import FooterBanner from "./FooterBanner";
 
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <Hoverbar />
       <Dashboard />
-      <EtsyBody />
-      <Footer/>
-
-      {/* <AboutFooter /> */}
-
-      {/* <Footer /> */}
+      <EtsyBody /> 
+      <Footer />
+      <FooterBanner />
     </div>
   );
 };

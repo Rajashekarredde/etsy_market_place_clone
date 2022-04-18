@@ -5,13 +5,9 @@ import React, { useEffect, useState } from "react";
 function CurrencyModal({ setOpenModal }) {
   const [userPreferedCurrency, setUserPreferedCurrency] = useState("");
 
-  const changePreferedCurrency = () => {
-    Axios.post("http://localhost:3001/api/changePreferedCurrency", {
-      userPreferedCurrency: userPreferedCurrency,
-      userId: 1,
-    }).then(() => {
-      alert("inserted the value");
-    });
+  const changePreferedCurrency = (userPreferedCurrency) => {
+    window.location.reload(false);
+    localStorage.setItem("preferedCurrency", userPreferedCurrency);
   };
 
   return (
@@ -26,7 +22,7 @@ function CurrencyModal({ setOpenModal }) {
           <p> Set the currency you use.</p>
         </div>
 
-        <div className="body">
+        <div className="currency_body body">
           <label> Currency </label>
           <select
             class="form-select"
@@ -44,10 +40,11 @@ function CurrencyModal({ setOpenModal }) {
 
         <div className="footer">
           <button onClick={() => setOpenModal(false)} id="cancelBtn">
-            {" "}
-            Close{" "}
+            Close
           </button>
-          <button onClick={() => changePreferedCurrency}> Save </button>
+          <button onClick={() => changePreferedCurrency(userPreferedCurrency)}>
+            Save
+          </button>
         </div>
       </div>
     </div>
