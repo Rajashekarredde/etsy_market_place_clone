@@ -19,21 +19,33 @@ const CartItem = ({ item }) => {
         itemImage: item.itemImage,
         itemPrice: item.itemPrice,
         itemCount: item.itemCount,
-        // itemId: item.itemId,
         qty: Number(qty),
+        giftMsg : "",
       })
     );
     window.location.reload(true);
   };
 
-  const removeHandler = (id) => {
-    console.log("remove");
-    dispatch(removeCartItem(id));
-    // window.location.reload(true);
-    // dispatch(removeFromCart(id));
+  const addGiftMsg = (msg) => {
+    dispatch(
+      createFinalCart({
+        itemId: item.itemId,
+        itemName: item.itemName,
+        itemDescription: item.itemDescription,
+        itemImage: item.itemImage,
+        itemPrice: item.itemPrice,
+        itemCount: item.itemCount,
+        qty: item.qty,
+        giftMsg : msg,
+      })
+    );
   };
 
-  return (
+  const removeHandler = (id) => {
+    dispatch(removeCartItem(id));
+  };
+
+  return(
     <div
       className="cart_pag"
       style={{
@@ -74,6 +86,19 @@ const CartItem = ({ item }) => {
         >
           <Delete />
         </button>
+
+        <br></br>
+        <label> Include gift message : </label>
+        <input
+              type="text"
+              className="gift_msg"
+              id="gift_msg"
+              style={{borderRadius: '5px', paddingLeft: '10px', marginLeft: '-60px', width: '210px'}}
+              placeholder="Gift Message !"
+              onChange={(e) => addGiftMsg(e.target.value)}
+              required
+            />
+
       </div>
     </div>
   );

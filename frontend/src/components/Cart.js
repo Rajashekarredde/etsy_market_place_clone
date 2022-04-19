@@ -9,7 +9,8 @@ import Axios from "axios";
 // import CartItem from "../components/CartItem";
 
 // Actions
-// import { addToCart, removeFromCart } from "../redux/actions/cartActions";
+
+import { removeCartItem } from "../features/cartItemsSlice";
 import {
   createCartItem,
   createFinalCart,
@@ -30,8 +31,8 @@ const CartScreen = () => {
 
   // useEffect(() => {}, []);
 
-  const removeFromCartHandler = (id) => {
-    // dispatch(removeFromCart(id));
+  const removeHandler = (id) => {
+     dispatch(removeCartItem(id));
   };
 
   const getCartCount = () => {
@@ -47,26 +48,47 @@ const CartScreen = () => {
     // return finalPrice;
   };
 
-  const handleCheckOut = () => {
-    let obj = JSON.parse(localStorage.getItem( "purchase" ));
-    if( obj != null)
-    {
-    localStorage.setItem("purchase", JSON.stringify(obj.concat(finalCartProducts)));
-    }
-    else{
-      localStorage.setItem("purchase", JSON.stringify(finalCartProducts));
-    }
+  const handleCheckOut = () => 
+  {
+    console.log(finalCartProducts);
+    console.log(Date.now());
+
+    finalCartProducts.map((product) => {
+        
+      Axios.post("/storePurchaseItems/" + user.id, {
+        itemId: product.itemId,
+        itemOrderId:Date.now(),
+        itemName: product.itemName,
+        itemImage : product.itemImage, 
+        itemQuantity : product.qty,
+        itemDescription : product.itemDescription,
+        itemPrice: product.itemPrice,
+        itemCount: product.itemCount,
+        itemOrderMsg : product.giftMsg,
+      }).then(
+        (response) => {
+          console.warn(response);
+          if (response.data.message === "success") {
+            console.log("purchase uploaded successfully !");
+          }
+        }
+      );
+    });
+
+    finalCartProducts.map((product) => {
+      removeHandler(product.itemId);
+
+      Axios.post(`/editCount/${product.itemId}`, { quantity: product.qty })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+
     window.location.pathname = "/purchase";
 
-    finalCartProducts.map((product) =>{
-        Axios.post(`/editCount/${product.itemId}`,{quantity:product.qty})
-        .then((response)=>{
-          console.log(response);
-        }).catch((err)=>{
-          console.log(err);
-        })
-      })
-   
   };
 
   return (
@@ -100,9 +122,9 @@ const CartScreen = () => {
             <p>Subtotal ({getCartCount()}) items</p>
             <p>${getCartSubTotal()}</p>
           </div>
-          <div >
+          <div>
             <button
-            style={{backgroundColor: "orange"}}
+              style={{ backgroundColor: "orange" }}
               onClick={() => {
                 handleCheckOut();
                 // item.itemId,
@@ -112,7 +134,7 @@ const CartScreen = () => {
                 // item.qty
               }}
             >
-               Checkout
+              Checkout
             </button>
           </div>
         </div>
