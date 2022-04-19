@@ -25,7 +25,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser);
+
 app.use(bodyParser.json({ limit: "20mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "20mb", extended: true }));
 
@@ -137,7 +137,7 @@ app.post("/register", (req, res) => {
   );
 });
 
-app.get("/signin", (req, res) => {
+app.get("/signin", (req, res) =>{
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
   } else {
@@ -249,12 +249,22 @@ const addProduct = async (req, res) => {
 app.post("/addProduct/:id", async (req, res) => {
   try {
     let upload = multer({ storage: storage }).single("itemImage");
-    upload(req, res, function (err) {
-      if (!req.file) {
+    upload(req, res, function (err) 
+    {
+      console.log("------------sunnyk-------------" );
+      console.log( req.file );
+      console.log("--------------------------------" );
+
+      if (!req.file)
+      {
         return res.send("Please select an image to upload");
-      } else if (err instanceof multer.MulterError) {
+      }
+      else if (err instanceof multer.MulterError)
+      {
         return res.send(err);
-      } else if (err) {
+      }
+      else if (err)
+      {
         return res.send(err);
       }
 
@@ -265,9 +275,7 @@ app.post("/addProduct/:id", async (req, res) => {
       const itemCount = req.body.itemCount;
       const itemImage = req.file.filename;
       const itemCategory = req.body.itemCategory;
-
-      console.log(itemImage);
-      console.log(itemName);
+      
       db.query(
         "INSERT INTO Items (userId, itemName, itemCategory, itemPrice, itemDescription, itemCount, itemImage) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [
@@ -289,6 +297,48 @@ app.post("/addProduct/:id", async (req, res) => {
         }
       );
     });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/storePurchaseItems/:id", async (req, res) => {
+  try {
+
+    console.log('gift msg -> ' + req.body.itemOrderMsg)
+      const userId = req.params.id;
+      const itemId = req.body.itemId;
+      const itemOrderId = req.body.itemOrderId;
+      const itemName = req.body.itemName;
+      const itemQuantity = req.body.itemQuantity;
+      const itemDescriprion = req.body.itemDescription;
+      const itemPrice = req.body.itemPrice;
+      const itemCount = req.body.itemCount;
+      const itemImage = req.body.itemImage;
+      const itemOrderMsg = req.body.itemOrderMsg;
+      db.query(
+        "INSERT INTO Purchases (itemOrderId, userId, itemId, itemName, itemImage, itemQty, itemDescription, itemPrice, itemCount, itemOrderMsg) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          itemOrderId,
+          userId,
+          itemId,
+          itemName,
+          itemImage,
+          itemQuantity,
+          itemDescriprion,
+          itemPrice,
+          itemCount,
+          itemOrderMsg,
+        ],
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            res.send({ message: "error" });
+          } else {
+            res.send({ message: "success" });
+          }
+        }
+      );
   } catch (err) {
     console.log(err);
   }
@@ -426,12 +476,14 @@ app.put("/updateItemImageById/:itemId", (req, res) => {
 app.get("/getShopById/:userId", (req, res) => {
   console.log("In get shop by id");
   const userId = req.params.userId;
+  console.log(userId);
   db.query("SELECT * FROM Users WHERE id=?", userId, (err, result) => {
     if (err) {
       res.send(err);
       console.log(err);
     } else {
       console.log(result);
+      console.log("-----------------------------");
       res.send({ success: true, result: result });
     }
   });
@@ -474,6 +526,26 @@ app.put("/updateShopImageById/:id", (req, res) => {
   }
 });
 
+
+app.post("/editCount/:id",(req,res)=>{
+  const productid=req.params.id;
+  const quantity=req.body.quantity;
+  console.log('sunny');
+  console.log(productid);
+  console.log(quantity);
+  db.query(
+    "UPDATE Items SET itemCount=itemCount-? WHERE itemId=?",
+    [quantity,productid],
+    (err,result)=>{
+      if(err){
+        console.log(err);
+      }else{
+        res.send({success:true});
+      }
+    }
+  )
+});
+
 app.get("/getSearchItems/:searchValue", (req, res) => {
   console.log("get Search Items -------------------------------");
   const searchValue = req.params.searchValue;
@@ -511,12 +583,16 @@ app.put("/updateUser/:id", async (req, res) => {
       const dob = req.body.dob;
       const userImage = req.file.filename;
       const about = req.body.about;
+      const phoneNumber = req.body.phoneNumber;
 
       console.log(userImage);
       console.log(userName);
+      console.log(
+        "Updateing profile --------------------------------: " + phoneNumber
+      );
       db.query(
-        "UPDATE Users set name = ?, city  = ?, dob  = ?, gender  = ?, about  = ?, profilePic=? where id = ? ",
-        [userName, city, dob, gender, about, userImage, userId],
+        "UPDATE Users set name = ?, city  = ?, dob  = ?, gender  = ?, about  = ?, phoneNumber =?, profilePic=? where id = ? ",
+        [userName, city, dob, gender, about, phoneNumber, userImage, userId],
         (err, result) => {
           console.log(result);
           if (err) {
@@ -571,6 +647,43 @@ app.get("/getFavourites/:id", (req, res) => {
   console.log("Getting all favoutrites in home");
   db.query(
     "SELECT * FROM Items WHERE itemId IN (SELECT itemId FROM Favourites WHERE userId=?)",
+    [userId],
+    (err, result) => {
+      console.log(result);
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send({ success: true, result });
+      }
+    }
+  );
+});
+
+app.get("/getPurchasedItems/:id", (req, res) => {
+  const userId = req.params.id;
+  db.query(
+    "SELECT * FROM Purchases WHERE userId=?",
+    [userId],
+    (err, result) => {
+      console.log(result);
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        console.log(result);
+        res.send({ success: true, result });
+      }
+    }
+  );
+});
+
+app.get("/othershop/:id", (req, res) => {
+  const userId = req.params.id;
+  console.log(userId);
+  console.log("Getting all items of others shop");
+  db.query(
+    "SELECT * FROM Items WHERE userId=?",
     [userId],
     (err, result) => {
       console.log(result);
