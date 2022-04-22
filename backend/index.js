@@ -128,9 +128,11 @@ app.post("/register", (req, res) => {
     "INSERT INTO Users (name, email, password) VALUES (?, ?, ?)",
     [username, email, password],
     (err, result) => {
-      if (err) {
+      if (err) 
+      {
         console.log(err);
-      } else {
+      }
+       else {
         res.send({ success: true, result });
       }
     }
@@ -149,6 +151,7 @@ app.post("/signin", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   console.log("In login post req");
+  
   // console.log(email + " " + password + " email body");
   db.query(
     "SELECT * FROM Users WHERE email = ? AND password = ?",
@@ -207,7 +210,7 @@ app.post("/findShopDuplicates", (req, res) => {
   );
 });
 
-app.post("/createShop/:id", (req, res) => {
+app.post("/createShop/:id", (req, res) =>{
   const shopName = req.body.shopName;
   const id = req.params.id;
   console.log("In create shop " + id);
@@ -305,7 +308,6 @@ app.post("/addProduct/:id", async (req, res) => {
 app.post("/storePurchaseItems/:id", async (req, res) => {
   try {
 
-    console.log('gift msg -> ' + req.body.itemOrderMsg)
       const userId = req.params.id;
       const itemId = req.body.itemId;
       const itemOrderId = req.body.itemOrderId;
