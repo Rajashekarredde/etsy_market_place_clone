@@ -55,7 +55,15 @@ const CartScreen = () => {
 
     finalCartProducts.map((product) => {
         
-      Axios.post("/storePurchaseItems/" + user.id, {
+      console.log("---------- product.itemDescription -----------");
+
+      console.log(product.itemDescription);
+
+      console.log("-----------------------------------------------");
+
+
+      Axios.post("http://127.0.0.1:4001/storePurchaseItems/" , {
+        id:user.id,
         itemId: product.itemId,
         itemOrderId:Date.now(),
         itemName: product.itemName,

@@ -10,7 +10,8 @@ import { selectUser } from "../features/userSlice";
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
-  const qtyChangeHandler = (qty) => {
+  const qtyChangeHandler = (qty) => {    
+
     dispatch(
       createFinalCart({
         itemId: item.itemId,
@@ -23,7 +24,14 @@ const CartItem = ({ item }) => {
         giftMsg : "",
       })
     );
-    window.location.reload(true);
+
+    if( qty == 0 )
+    {
+      removeHandler( item.itemId );
+    }
+
+    //window.location.reload(true);
+    
   };
 
   const addGiftMsg = (msg) => {
@@ -41,7 +49,8 @@ const CartItem = ({ item }) => {
     );
   };
 
-  const removeHandler = (id) => {
+  const removeHandler = (id) =>
+  {
     dispatch(removeCartItem(id));
   };
 
@@ -75,8 +84,8 @@ const CartItem = ({ item }) => {
         >
           {[...Array(item.itemCount).keys()].map((x) => 
           (
-            <option key={x + 1} value={x + 1}>
-              {x + 1}
+            <option key={x } value={x}>
+              {x }
             </option>
           ))}
         </select>

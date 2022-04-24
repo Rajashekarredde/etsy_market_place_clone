@@ -84,7 +84,7 @@ function EtsyBody() {
   {
     console.log("Favourites added" + itemId + userId);
     alert('Item Added To Favourites!');
-    Axios.post("/addFavourite", {
+    Axios.post("http://127.0.0.1:4001/addFavourite", {
       itemId: itemId,
       userId: userId,
     }).then((response) => {
