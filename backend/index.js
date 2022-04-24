@@ -11,6 +11,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = express("cocookie-parser");
 const multer = require("multer");
 const path = require("path");
+const { uploadFile, getFileStream } = require('./s3')
 
 //import routes
 const userRoutes = require("./routes/user");
@@ -140,6 +141,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/signin", (req, res) =>{
+  
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
   } else {
@@ -252,12 +254,11 @@ const addProduct = async (req, res) => {
 app.post("/addProduct/:id", async (req, res) => {
   try {
     let upload = multer({ storage: storage }).single("itemImage");
-    upload(req, res, function (err) 
-    {
-      console.log("------------sunnyk-------------" );
-      console.log( req.file );
-      console.log("--------------------------------" );
 
+
+    upload(req, res, async (err) =>
+    {
+     
       if (!req.file)
       {
         return res.send("Please select an image to upload");
@@ -271,6 +272,12 @@ app.post("/addProduct/:id", async (req, res) => {
         return res.send(err);
       }
 
+      const result =  await uploadFile(req.file)
+
+      console.log("------------sunnyk-------------" );
+      console.log( result.Location );
+      console.log("--------------------------------" );
+      
       const userId = req.params.id;
       const itemName = req.body.itemName;
       const itemDescriprion = req.body.itemDescription;
@@ -305,10 +312,10 @@ app.post("/addProduct/:id", async (req, res) => {
   }
 });
 
-app.post("/storePurchaseItems/:id", async (req, res) => {
+app.post("/storePurchaseItems/", async (req, res) => {
   try {
 
-      const userId = req.params.id;
+      const userId = req.body.id;
       const itemId = req.body.itemId;
       const itemOrderId = req.body.itemOrderId;
       const itemName = req.body.itemName;
