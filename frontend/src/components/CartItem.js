@@ -29,9 +29,7 @@ const CartItem = ({ item }) => {
     {
       removeHandler( item.itemId );
     }
-
     //window.location.reload(true);
-    
   };
 
   const addGiftMsg = (msg) => {
