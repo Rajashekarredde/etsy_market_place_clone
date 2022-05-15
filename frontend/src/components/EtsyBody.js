@@ -38,7 +38,7 @@ function EtsyBody() {
   }, []);
 
   const getItems = () => {
-    Axios.get("/getItems").then((response) => {
+    Axios.get("/api/products/getItems").then((response) => {
       if (response.data.success === true) {
         console.log(response.data.result);
         dispatch(getAllItems(response.data.result));
